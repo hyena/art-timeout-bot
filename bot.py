@@ -90,7 +90,8 @@ async def on_message(message):
         # Don't update the user or timestamp
         if enabled:
             logging.warning(f'Sending warning message to {message.author.name}')
-            await message.author.send(f"`*BZZZT!*--Warning!-Courtesy-Infraction!-Please-wait-{minutes.minutes}-minutes-before-posting-art-after-someone-else!--Have-a-nice-day.`"
+            await message.author.send(f"`*BZZZT!*--Warning!-Courtesy-Infraction!-Please-wait-{timeout.seconds // 60}-minutes
+            -before-posting-art-after-someone-else!--Have-a-nice-day.`"
                                       "\n(This is an experimental golem created by Lagos. If you think this message is in error or if you find it obnoxious, please give feedback to them.)")
     await bot.process_commands(message)
 
