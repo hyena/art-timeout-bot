@@ -26,7 +26,8 @@ last_user = None
 
 
 async def is_officer(ctx):
-    return 'GM' in ctx.author.roles or 'Captain' in ctx.author.roles
+    good = discord.utils.find(lambda r: r.name == 'GM' or r.name == 'Captain', ctx.author.roles)
+    return good is not None
 
 
 @bot.event
@@ -88,8 +89,8 @@ async def on_message(message):
     else:
         # Don't update the user or timestamp
         if enabled:
-            logging.info(f'Sending warning message to {message.author.name}')
-            await message.author.send(f"`*BZZZT!*--Warning!-Courtesy-Infraction!-Please-wait-{timeout.minutes}-minutes-before-posting-art-after-someone-else!--Have-a-nice-day.`"
+            logging.warning(f'Sending warning message to {message.author.name}')
+            await message.author.send(f"`*BZZZT!*--Warning!-Courtesy-Infraction!-Please-wait-{minutes.seconds}-minutes-before-posting-art-after-someone-else!--Have-a-nice-day.`"
                                       "\n(This is an experimental golem created by Lagos. If you think this message is in error or if you find it obnoxious, please give feedback to them.)")
     await bot.process_commands(message)
 
